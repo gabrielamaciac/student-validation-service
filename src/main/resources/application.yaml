@@ -1,0 +1,18 @@
+server:
+  contextPath: /api
+  port: 8082
+spring:
+  datasource:
+    continue-on-error: true
+    initialization-mode: always
+    initialize: true
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PWD}
+    url: jdbc:postgresql://localhost:5432/validation
+  jpa:
+    hibernate:
+      ddl-auto: create
+      show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect

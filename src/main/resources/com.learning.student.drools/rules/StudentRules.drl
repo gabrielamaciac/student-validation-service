@@ -1,0 +1,19 @@
+package com.learning.student.drools.rules
+
+import com.learning.student.validationservice.model.Student;
+import com.learning.student.validationservice.model.Address;
+import com.learning.student.validationservice.model.Grade;
+
+global com.learning.student.validationservice.model Validation validation;
+
+dialect "mvel"
+
+rule "Student has an average of 5 per discipline"
+    when
+         Grade($marks: gradeMarks)
+         gradeMarks: Integer( this < 5 ) from
+                         accumulate( Grade( $mark: mark ) from $marks,
+                                     sum($mark) )
+    then
+        validation.setError("Student doesn't have an average of 5 per discipline."
+    end
