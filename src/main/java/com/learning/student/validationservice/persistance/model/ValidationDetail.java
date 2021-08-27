@@ -14,12 +14,14 @@ import java.util.UUID;
 @Table(name = "validation")
 @NoArgsConstructor
 @Data
-public class ValidationDetails {
+public class ValidationDetail {
     @Id
     @GeneratedValue
     private UUID id;
     @Column(name = "student_id")
     private UUID studentId;
-    @Column(name = "error")
-    private String error;
+    @Column(name = "name")
+    private String errorName;
+    @Column(name = "description")
+    private String errorDescription;
 }

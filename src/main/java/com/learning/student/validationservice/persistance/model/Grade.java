@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -14,5 +12,5 @@ import java.util.List;
 public class Grade {
     private String subject;
     private String dateReceived;
-    private List<Integer> marks;
+    private Double mark;
 }

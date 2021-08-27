@@ -5,12 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Validation {
-    private String id;
-    private String studentId;
-    private String error;
+public class ValidationDetailsDto {
+    private UUID studentId;
+    private String errorName;
+    private String errorDescription;
 }

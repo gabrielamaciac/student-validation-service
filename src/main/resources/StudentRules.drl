@@ -1,0 +1,23 @@
+import com.learning.student.validationservice.persistance.model.Student
+import com.learning.student.validationservice.persistance.model.Address
+import java.util.*
+
+global com.learning.student.validationservice.service.util.CustomMessages messages
+
+dialect "mvel"
+
+rule "Student has non-null address."
+    when
+        Student($address: address != null)
+        Address(street == null || number == null || country == null || city == null
+        || street == "" || number == "" || country == "" || city == "") from $address;
+    then
+        messages.addMessage("address", "Address is invalid.", "At least one property is null or empty." );
+end
+
+rule "Student has non-null dateOfBirth."
+    when
+        Student(dateOfBirth == null || dateOfBirth == "");
+    then
+        messages.addMessage("dateOfBirth", "Birthdate is invalid.", "dateOfBirth field is null or empty." );
+end
