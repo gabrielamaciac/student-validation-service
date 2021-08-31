@@ -19,4 +19,5 @@ public class Student {
     private String dateOfBirth;
     private Address address;
     private List<Grade> grades;
+    private boolean isValid;
 }

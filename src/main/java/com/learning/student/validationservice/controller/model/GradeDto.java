@@ -5,12 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 public class GradeDto {
     private String subject;
-    private String dateReceived;
-    private Double mark;
+    private List<MarkDto> marks;
 }

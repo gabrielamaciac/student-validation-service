@@ -1,6 +1,9 @@
 import com.learning.student.validationservice.persistance.model.Student
 import com.learning.student.validationservice.persistance.model.Address
+import com.learning.student.validationservice.persistance.model.Grade
+import com.learning.student.validationservice.persistance.model.Mark
 import java.util.*
+import java.lang.Double
 
 global com.learning.student.validationservice.service.util.CustomMessages messages
 

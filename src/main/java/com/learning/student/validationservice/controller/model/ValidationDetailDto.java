@@ -11,7 +11,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ValidationDetailsDto {
+public class ValidationDetailDto {
     private UUID studentId;
     private String errorName;
     private String errorDescription;

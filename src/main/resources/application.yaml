@@ -18,7 +18,8 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
   rabbitmq:
-    exchange: ${EXCHANGE_TYPE}
-    routingkey: ${ROUTING_KEY}
-queue:
-  name: ${QUEUE_NAME}
+    exchange: amq.direct
+    validationqueue: validation-queue
+    validationrouting: validation-routing-key
+    responsequeue: validation-response-queue
+    responserouting: validation-response-key

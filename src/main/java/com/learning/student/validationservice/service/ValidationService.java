@@ -8,7 +8,5 @@ import java.util.List;
 public interface ValidationService {
     List<ValidationDetail> getValidationForStudent(String id);
 
-//    ValidationDetail validate(String id, Student student);
-
     List<ValidationDetail> validateStudent(String studentId, Student student);
 }
