@@ -3,11 +3,12 @@ import com.learning.student.validationservice.persistance.model.Address
 import com.learning.student.validationservice.persistance.model.Grade
 import com.learning.student.validationservice.persistance.model.Mark
 import java.util.*
-import java.lang.Double
+
+import static com.learning.student.validationservice.service.util.ValidationCalculator.isAverageBelowFive;
 
 global com.learning.student.validationservice.service.util.CustomMessages messages
 
-dialect "mvel"
+dialect "java"
 
 rule "Student has non-null address."
     when
@@ -24,3 +25,27 @@ rule "Student has non-null dateOfBirth."
     then
         messages.addMessage("dateOfBirth", "Birthdate is invalid.", "dateOfBirth field is null or empty." );
 end
+
+rule "Student has non-null firstname."
+    when
+        Student(firstName == null || firstName == "");
+    then
+        messages.addMessage("firstName", "Firstname is invalid.", "firstName field is null or empty." );
+end
+
+rule "Student has non-null lastname."
+    when
+        Student(lastName == null || lastName == "");
+    then
+        messages.addMessage("lastName", "Lastname is invalid.", "lastName field is null or empty." );
+end
+
+rule "Student has an average of 5 per subject."
+    when
+        $student: Student($grades: grades != null)
+        eval(isAverageBelowFive($grades) == true)
+    then
+        messages.addMessage("grades", "Grade average below 5.", "There is at least one subject for which the average is below 5." );
+end
+
+

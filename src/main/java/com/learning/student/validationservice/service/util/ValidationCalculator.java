@@ -16,26 +16,25 @@ public class ValidationCalculator {
     @Autowired
     private KieContainer kieContainer;
 
-    public CustomMessages triggerRules(Student student) {
-        KieSession kieSession = kieContainer.newKieSession();
-        CustomMessages messages = new CustomMessages();
-        kieSession.setGlobal("messages", messages);
-        kieSession.insert(student);
-        kieSession.fireAllRules();
-
-        return messages;
-    }
-
-    //the subject with average > 5
-    private List<Double> calculateAverages(Student student) {
+    public static boolean isAverageBelowFive(List grades) {
         List<Double> averages = new ArrayList<>();
-        for (Grade grade : student.getGrades()) {
+        for (Grade grade : new ArrayList<Grade>(grades)) {
             Double averageGrade = grade.getMarks().stream()
                     .mapToDouble(mark -> mark.getMark())
                     .average()
                     .orElse(0.0);
             averages.add(averageGrade);
         }
-        return averages;
+        return averages.stream().anyMatch(a -> a < 5.0);
+    }
+
+    public CustomMessages triggerRules(Student student) {
+        KieSession kieSession = kieContainer.newKieSession();
+        CustomMessages messages = new CustomMessages();
+        kieSession.setGlobal("messages", messages);
+        kieSession.insert(student);
+        kieSession.fireAllRules();
+        kieSession.dispose();
+        return messages;
     }
 }
