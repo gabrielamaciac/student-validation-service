@@ -1,6 +1,7 @@
 package com.learning.student.validationservice.service.util;
 
 import com.learning.student.validationservice.persistance.model.Grade;
+import com.learning.student.validationservice.persistance.model.Mark;
 import com.learning.student.validationservice.persistance.model.Student;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
@@ -20,7 +21,7 @@ public class ValidationCalculator {
         List<Double> averages = new ArrayList<>();
         for (Grade grade : new ArrayList<Grade>(grades)) {
             Double averageGrade = grade.getMarks().stream()
-                    .mapToDouble(mark -> mark.getMark())
+                    .mapToDouble(Mark::getMark)
                     .average()
                     .orElse(0.0);
             averages.add(averageGrade);

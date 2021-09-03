@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/validation")
-public class ValidationController {
+public class ValidationController implements ValidationApi {
 
     private final ValidationService validationService;
     private ModelMapper modelMapper = new ModelMapper();
@@ -29,8 +29,9 @@ public class ValidationController {
         this.validationService = validationService;
     }
 
+    @Override
     @GetMapping("/student/{studentId}")
-    public ResponseEntity<List<ValidationDetailDto>> getValidationDetails(@PathVariable String studentId) {
+    public ResponseEntity<List<ValidationDetailDto>> getValidationForStudentById(@PathVariable String studentId) {
         List<ValidationDetail> validationDetails = validationService.getValidationForStudent(studentId);
         List<ValidationDetailDto> response = validationDetails.stream()
                 .map(vd -> modelMapper.map(vd, ValidationDetailDto.class))
@@ -38,8 +39,9 @@ public class ValidationController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @Override
     @PostMapping("/student/{studentId}")
-    public ResponseEntity<List<ValidationDetailDto>> validateStudent(@RequestBody StudentDto studentDto, @PathVariable String studentId) {
+    public ResponseEntity<List<ValidationDetailDto>> validateStudentById(@RequestBody StudentDto studentDto, @PathVariable String studentId) {
         List<ValidationDetail> validationDetails = validationService.validateStudent(studentId, modelMapper.map(studentDto, Student.class));
         List<ValidationDetailDto> response = validationDetails.stream()
                 .map(vd -> modelMapper.map(vd, ValidationDetailDto.class))

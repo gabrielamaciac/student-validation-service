@@ -13,14 +13,14 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan("com.learning.student.validationservice.service")
 public class DroolsConfiguration {
-    public static final String drlFile = "StudentRules.drl";
+    public static final String RULES_DRL = "StudentRules.drl";
 
     @Bean
     public KieContainer kieContainer() {
         KieServices kieServices = KieServices.Factory.get();
 
         KieFileSystem kieFileSystem = kieServices.newKieFileSystem();
-        kieFileSystem.write(ResourceFactory.newClassPathResource(drlFile));
+        kieFileSystem.write(ResourceFactory.newClassPathResource(RULES_DRL));
         KieBuilder kieBuilder = kieServices.newKieBuilder(kieFileSystem);
         kieBuilder.buildAll();
         KieModule kieModule = kieBuilder.getKieModule();

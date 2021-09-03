@@ -30,9 +30,9 @@ public class StudentServiceSender {
         try {
             String json = objectMapper.writeValueAsString(validationResponse);
             jsonRabbitTemplate.convertAndSend(exchange, routingKey, json);
-            log.info("ValidationResponse sent to student-service: " + validationResponse);
+            log.info("ValidationResponse sent to student-service. studentId: " + validationResponse.getStudentId());
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            log.error("Error while processing json: " + e);
         }
     }
 }

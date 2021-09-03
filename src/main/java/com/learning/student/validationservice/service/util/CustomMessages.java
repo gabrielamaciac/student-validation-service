@@ -17,9 +17,6 @@ public class CustomMessages {
     }
 
     public boolean hasErrors() {
-        if (this.messages.size() > 0) {
-            return true;
-        }
-        return false;
+        return !this.messages.isEmpty();
     }
 }

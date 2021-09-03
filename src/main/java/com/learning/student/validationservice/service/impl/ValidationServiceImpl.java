@@ -1,7 +1,5 @@
 package com.learning.student.validationservice.service.impl;
 
-import com.learning.student.validationservice.integration.model.ValidationResponse;
-import com.learning.student.validationservice.integration.queue.StudentServiceSender;
 import com.learning.student.validationservice.persistance.model.Student;
 import com.learning.student.validationservice.persistance.model.ValidationDetail;
 import com.learning.student.validationservice.persistance.repository.ValidationRepository;
@@ -26,9 +24,6 @@ public class ValidationServiceImpl implements ValidationService {
     @Autowired
     private ValidationCalculator validationCalculator;
 
-    @Autowired
-    private StudentServiceSender studentServiceSender;
-
     @Override
     public List<ValidationDetail> getValidationForStudent(String id) {
         return validationRepository.findByStudentId(UUID.fromString(id));
@@ -49,17 +44,6 @@ public class ValidationServiceImpl implements ValidationService {
             validationDetails.add(validationDetail);
             validationRepository.save(validationDetail);
         }
-
-        //send the flag and the studentId to student-service
-        boolean flag = false;
-        if (validationDetails.size() == 0) {
-            flag = true;
-        }
-        ValidationResponse validationResponse = new ValidationResponse();
-        validationResponse.setStudentId(studentId);
-        validationResponse.setValid(flag);
-        studentServiceSender.sendValidation(validationResponse);
-        log.info("Validation sent to student-service. isValid: " + flag);
         return validationDetails;
     }
 }
