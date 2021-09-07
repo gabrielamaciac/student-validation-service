@@ -12,8 +12,8 @@ public class CustomMessages {
         return Collections.unmodifiableCollection(messages);
     }
 
-    public void addMessage(String field, String message, String description) {
-        this.messages.add(new CustomMessage(field, message, description));
+    public void addMessage(String message, String description) {
+        this.messages.add(new CustomMessage(message, description));
     }
 
     public boolean hasErrors() {

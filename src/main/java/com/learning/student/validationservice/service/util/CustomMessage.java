@@ -6,12 +6,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CustomMessage {
-    private final String field;
     private final String message;
     private final String description;
 
-    public CustomMessage(String field, String message, String description) {
-        this.field = field;
+    public CustomMessage(String message, String description) {
         this.message = message;
         this.description = description;
     }

@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface ValidationApi {
     @GetMapping("/student/{studentId}")
-    ResponseEntity<List<ValidationDetailDto>> getValidationForStudentById(@PathVariable String studentId);
+    ResponseEntity<List<ValidationDetailDto>> getValidationByStudentId(@PathVariable String studentId);
 
     @PostMapping("/student/{studentId}")
     ResponseEntity<List<ValidationDetailDto>> validateStudentById(@RequestBody StudentDto studentDto, @PathVariable String studentId);

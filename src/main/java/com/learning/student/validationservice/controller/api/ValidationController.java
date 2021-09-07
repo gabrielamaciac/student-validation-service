@@ -31,7 +31,7 @@ public class ValidationController implements ValidationApi {
 
     @Override
     @GetMapping("/student/{studentId}")
-    public ResponseEntity<List<ValidationDetailDto>> getValidationForStudentById(@PathVariable String studentId) {
+    public ResponseEntity<List<ValidationDetailDto>> getValidationByStudentId(@PathVariable String studentId) {
         List<ValidationDetail> validationDetails = validationService.getValidationForStudent(studentId);
         List<ValidationDetailDto> response = validationDetails.stream()
                 .map(vd -> modelMapper.map(vd, ValidationDetailDto.class))

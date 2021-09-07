@@ -16,28 +16,35 @@ rule "Student has non-null address."
         Address(street == null || number == null || country == null || city == null
         || street == "" || number == "" || country == "" || city == "") from $address;
     then
-        messages.addMessage("address", "Address is invalid.", "At least one property is null or empty." );
+        messages.addMessage("Address is invalid.", "At least one address property is null or empty." );
 end
 
 rule "Student has non-null dateOfBirth."
     when
         Student(dateOfBirth == null || dateOfBirth == "");
     then
-        messages.addMessage("dateOfBirth", "Birthdate is invalid.", "dateOfBirth field is null or empty." );
+        messages.addMessage("Birthdate is invalid.", "dateOfBirth field is null or empty." );
 end
 
 rule "Student has non-null firstname."
     when
         Student(firstName == null || firstName == "");
     then
-        messages.addMessage("firstName", "Firstname is invalid.", "firstName field is null or empty." );
+        messages.addMessage("Firstname is invalid.", "firstName field is null or empty." );
 end
 
 rule "Student has non-null lastname."
     when
         Student(lastName == null || lastName == "");
     then
-        messages.addMessage("lastName", "Lastname is invalid.", "lastName field is null or empty." );
+        messages.addMessage("Lastname is invalid.", "lastName field is null or empty." );
+end
+
+rule "Student has non-null CNP."
+    when
+        Student(cnp == null || cnp == "");
+    then
+        messages.addMessage("CNP is invalid.", "cnp field is null or empty." );
 end
 
 rule "Student has an average of 5 per subject."
@@ -45,7 +52,7 @@ rule "Student has an average of 5 per subject."
         $student: Student($grades: grades != null)
         eval(isAverageBelowFive($grades) == true)
     then
-        messages.addMessage("grades", "Grade average below 5.", "There is at least one subject for which the average is below 5." );
+        messages.addMessage("Grade average below 5.", "There is at least one subject for which the average is below 5." );
 end
 
 
