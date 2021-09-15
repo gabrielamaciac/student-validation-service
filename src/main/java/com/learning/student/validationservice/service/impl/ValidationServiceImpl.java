@@ -8,7 +8,6 @@ import com.learning.student.validationservice.service.util.CustomMessage;
 import com.learning.student.validationservice.service.util.CustomMessages;
 import com.learning.student.validationservice.service.util.ValidationCalculator;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,11 +17,13 @@ import java.util.UUID;
 @Service
 @Slf4j
 public class ValidationServiceImpl implements ValidationService {
-    @Autowired
-    private ValidationRepository validationRepository;
+    private final ValidationRepository validationRepository;
+    private final ValidationCalculator validationCalculator;
 
-    @Autowired
-    private ValidationCalculator validationCalculator;
+    public ValidationServiceImpl(ValidationRepository validationRepository, ValidationCalculator validationCalculator) {
+        this.validationRepository = validationRepository;
+        this.validationCalculator = validationCalculator;
+    }
 
     @Override
     public List<ValidationDetail> getValidationForStudent(String id) {

@@ -6,7 +6,6 @@ import com.learning.student.validationservice.persistance.model.Student;
 import com.learning.student.validationservice.service.SendValidationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -16,8 +15,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class ValidationQueueConsumer {
 
-    @Autowired
-    SendValidationService sendValidationService;
+    private final SendValidationService sendValidationService;
 
     ObjectMapper objectMapper = new ObjectMapper();
 

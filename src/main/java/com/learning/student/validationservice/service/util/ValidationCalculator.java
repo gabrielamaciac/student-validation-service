@@ -15,7 +15,11 @@ import java.util.List;
 public class ValidationCalculator {
 
     @Autowired
-    private KieContainer kieContainer;
+    private final KieContainer kieContainer;
+
+    public ValidationCalculator(KieContainer kieContainer) {
+        this.kieContainer = kieContainer;
+    }
 
     public static boolean isAverageBelowFive(List grades) {
         List<Double> averages = new ArrayList<>();
