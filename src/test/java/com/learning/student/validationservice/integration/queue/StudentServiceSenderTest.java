@@ -1,5 +1,6 @@
 package com.learning.student.validationservice.integration.queue;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.learning.student.validationservice.util.ValidationTestData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@ class StudentServiceSenderTest {
     }
 
     @Test
-    void validationResponseCanBeSent() {
+    void validationResponseCanBeSent() throws JsonProcessingException {
         studentServiceSender.sendValidation(ValidationTestData.getValidationResponse());
         verify(amqpTemplate).convertAndSend(any(), any(), any(String.class));
     }

@@ -8,6 +8,7 @@ import com.learning.student.validationservice.persistance.model.ValidationDetail
 import com.learning.student.validationservice.util.ValidationTestData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -19,9 +20,13 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class ValidationControllerTest {
+/**
+ * Test for {@link ValidationController}
+ */
+class ValidationControllerTest {
     private ValidationFacade validationService;
     private ValidationController validationController;
+    private ModelMapper modelMapper;
 
     private ValidationDetail validationDetail = ValidationTestData.getValidationDetails();
     private Student student = ValidationTestData.getStudent();
@@ -31,7 +36,8 @@ public class ValidationControllerTest {
     @BeforeEach
     void setUp() {
         validationService = mock(ValidationFacade.class);
-        validationController = new ValidationController(validationService);
+        modelMapper = new ModelMapper();
+        validationController = new ValidationController(validationService, modelMapper);
     }
 
     @Test

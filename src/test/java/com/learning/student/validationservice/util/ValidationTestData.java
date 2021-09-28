@@ -4,7 +4,6 @@ import com.learning.student.validationservice.controller.model.AddressDto;
 import com.learning.student.validationservice.controller.model.GradeDto;
 import com.learning.student.validationservice.controller.model.MarkDto;
 import com.learning.student.validationservice.controller.model.StudentDto;
-import com.learning.student.validationservice.controller.model.ValidationDetailDto;
 import com.learning.student.validationservice.integration.model.ValidationResponse;
 import com.learning.student.validationservice.persistance.model.Address;
 import com.learning.student.validationservice.persistance.model.Grade;
@@ -38,7 +37,7 @@ public class ValidationTestData {
     public static final String TEST_SUBJECT = "Test Subject";
     public static final String DATE_RECEIVED = "2020-03-12";
 
-    public static final String STUDENT_JSON = "{\n" +
+    public static final String STUDENT_JSON_WITH_ID = "{\n" +
             "    \"id\": \"4ce2dddb-438a-4305-b7e3-9981fda59355\",\n" +
             "    \"firstName\": \"Test FirstName\",\n" +
             "    \"lastName\": \"Test LastName\",\n" +
@@ -69,10 +68,6 @@ public class ValidationTestData {
 
     public static ValidationDetail getValidationDetails() {
         return new ValidationDetail(VALIDATION_UUID, STUDENT_UUID, ERROR_NAME, ERROR_DESCRIPTION);
-    }
-
-    public static ValidationDetailDto getValidationDetailDto() {
-        return new ValidationDetailDto(STUDENT_ID, ERROR_NAME, ERROR_DESCRIPTION);
     }
 
     public static Student getStudent() {
@@ -114,4 +109,39 @@ public class ValidationTestData {
     public static ValidationResponse getValidationResponse() {
         return new ValidationResponse(STUDENT_ID, true);
     }
+
+    public static String getStudentJson(Double grade1, Double grade2) {
+        return "{\n" +
+                "    \"firstName\": \"Test FirstName\",\n" +
+                "    \"lastName\": \"Test LastName\",\n" +
+                "    \"cnp\": \"Test CNP\",\n" +
+                "    \"dateOfBirth\": \"1987-12-03\",\n" +
+                "    \"address\": {\n" +
+                "        \"street\": \"Test Street\",\n" +
+                "        \"number\": \"Test number\",\n" +
+                "        \"city\": \"Test City\",\n" +
+                "        \"country\": \"Test Country\"\n" +
+                "    },\n" +
+                "    \"grades\": [\n" +
+                "        {\n" +
+                "            \"subject\": \"Geografie\",\n" +
+                "            \"marks\": [\n" +
+                "                {\n" +
+                "                    \"dateReceived\": \"2020-03-12\",\n" +
+                "                    \"mark\": " + grade1 + "\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"dateReceived\": \"2020-03-12\",\n" +
+                "                    \"mark\": " + grade2 + "\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        }\n" +
+                "    ]\n" +
+                "}";
+    }
+
+    public static final String getErrorForStudentJson(String uuid) {
+        return "[{\"studentId\":\"" + uuid + "\",\"errorName\":\"Grade average below 5.\",\"errorDescription\":\"There is at least one subject for which the average is below 5.\"}]";
+    }
+
 }

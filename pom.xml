@@ -15,9 +15,11 @@
     <description>Service for student validations</description>
     <properties>
         <java.version>11</java.version>
-        <sonar.coverage.exclusions>**/*Configuration.*, **/*Application.*</sonar.coverage.exclusions>
+        <sonar.coverage.exclusions>**/*Configuration.*, **/*Application.*, **/model/**, **/util/**
+        </sonar.coverage.exclusions>
     </properties>
     <dependencies>
+        <!-- Spring -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -26,11 +28,20 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <!-- Utils -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>2.4.4</version>
+        </dependency>
+
+        <!-- Drools -->
         <dependency>
             <groupId>org.kie</groupId>
             <artifactId>kie-ci</artifactId>
@@ -41,25 +52,27 @@
             <artifactId>drools-decisiontables</artifactId>
             <version>7.1.0.Beta1</version>
         </dependency>
-        <dependency>
-            <groupId>org.modelmapper</groupId>
-            <artifactId>modelmapper</artifactId>
-            <version>2.4.4</version>
-        </dependency>
+
+        <!-- Postgres -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
         </dependency>
+
         <!-- Open API -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.5.10</version>
         </dependency>
+
+        <!-- RabbitMq -->
         <dependency>
             <groupId>org.springframework.integration</groupId>
             <artifactId>spring-integration-amqp</artifactId>
         </dependency>
+
+        <!-- Testing -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -103,6 +116,8 @@
                     <excludes>
                         <exclude>**/*Configuration.*</exclude>
                         <exclude>**/*Application.*</exclude>
+                        <exclude>**/model/**</exclude>
+                        <exclude>**/util/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>

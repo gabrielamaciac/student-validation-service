@@ -1,23 +1,20 @@
 package com.learning.student.validationservice.integration.queue;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.learning.student.validationservice.persistance.model.Student;
 import com.learning.student.validationservice.service.SendValidationService;
+import com.learning.student.validationservice.util.GenericMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 /**
- * Consumes the message from student-service and validates the Student objects.
+ * Consumes the message from student-service via validation-queue and validates the Student objects.
  */
 @Component
 @Slf4j
 public class ValidationQueueConsumer {
 
     private final SendValidationService sendValidationService;
-
-    ObjectMapper objectMapper = new ObjectMapper();
 
     public ValidationQueueConsumer(SendValidationService sendValidationService) {
         this.sendValidationService = sendValidationService;
@@ -29,12 +26,8 @@ public class ValidationQueueConsumer {
     }
 
     private void processMessage(String message) {
-        try {
-            log.info("Validating message: " + message);
-            Student student = objectMapper.readValue(message, Student.class);
-            sendValidationService.validateAndSend(student.getId(), student);
-        } catch (JsonProcessingException e) {
-            log.error("Error processing received json: " + e);
-        }
+        log.info("Validating message: " + message);
+        Student student = GenericMapper.readValue(message, Student.class);
+        sendValidationService.validateAndSend(student.getId(), student);
     }
 }
