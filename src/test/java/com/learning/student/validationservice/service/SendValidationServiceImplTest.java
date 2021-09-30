@@ -40,10 +40,10 @@ class SendValidationServiceImplTest {
     void validateAndSendIsSuccessfulForInvalidStudent() {
         // Given
         List<ValidationDetail> expectedList = Collections.singletonList(validationDetail);
-        when(validationService.validateStudent(ValidationTestData.STUDENT_ID, student)).thenReturn(expectedList);
+        when(validationService.validateStudent(ValidationTestData.STUDENT_UUID, student)).thenReturn(expectedList);
 
         // When
-        sendValidationService.validateAndSend(ValidationTestData.STUDENT_ID, student);
+        sendValidationService.validateAndSend(ValidationTestData.STUDENT_UUID, student);
 
         // Then
         ArgumentCaptor<ValidationResponse> captor = ArgumentCaptor.forClass(ValidationResponse.class);
@@ -51,16 +51,16 @@ class SendValidationServiceImplTest {
 
         ValidationResponse validationResponse = captor.getValue();
         assertFalse(validationResponse.isValid());
-        assertEquals(ValidationTestData.STUDENT_ID, validationResponse.getStudentId());
+        assertEquals(ValidationTestData.STUDENT_UUID, validationResponse.getStudentId());
     }
 
     @Test
     void validateAndSendIsSuccessfulForValidStudent() {
         // Given
-        when(validationService.validateStudent(ValidationTestData.STUDENT_ID, student)).thenReturn(Collections.emptyList());
+        when(validationService.validateStudent(ValidationTestData.STUDENT_UUID, student)).thenReturn(Collections.emptyList());
 
         // When
-        sendValidationService.validateAndSend(ValidationTestData.STUDENT_ID, student);
+        sendValidationService.validateAndSend(ValidationTestData.STUDENT_UUID, student);
 
         // Then
         ArgumentCaptor<ValidationResponse> captor = ArgumentCaptor.forClass(ValidationResponse.class);
@@ -68,6 +68,6 @@ class SendValidationServiceImplTest {
 
         ValidationResponse validationResponse = captor.getValue();
         assertTrue(validationResponse.isValid());
-        assertEquals(ValidationTestData.STUDENT_ID, validationResponse.getStudentId());
+        assertEquals(ValidationTestData.STUDENT_UUID, validationResponse.getStudentId());
     }
 }

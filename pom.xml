@@ -15,7 +15,7 @@
     <description>Service for student validations</description>
     <properties>
         <java.version>11</java.version>
-        <sonar.coverage.exclusions>**/*Configuration.*, **/*Application.*, **/model/**, **/util/**
+        <sonar.coverage.exclusions>**/*Configuration.*, **/*Application.*, **/model/**, **/util/**, **/exception/**
         </sonar.coverage.exclusions>
     </properties>
     <dependencies>
@@ -78,6 +78,18 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>1.16.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>1.16.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -118,6 +130,7 @@
                         <exclude>**/*Application.*</exclude>
                         <exclude>**/model/**</exclude>
                         <exclude>**/util/**</exclude>
+                        <exclude>**/exception/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>

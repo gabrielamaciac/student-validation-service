@@ -31,7 +31,7 @@ public class ValidationServiceImpl implements ValidationService {
     }
 
     @Override
-    public List<ValidationDetail> validateStudent(String studentId, Student student) {
+    public List<ValidationDetail> validateStudent(UUID studentId, Student student) {
         List<ValidationDetail> validationDetails = new ArrayList<>();
         //trigger rules
         CustomMessages result = validationCalculator.triggerRules(student);
@@ -40,7 +40,7 @@ public class ValidationServiceImpl implements ValidationService {
         for (CustomMessage message : result.getMessages()) {
             ValidationDetail validationDetail = new ValidationDetail();
             validationDetail.setErrorName(message.getMessage());
-            validationDetail.setStudentId(UUID.fromString(studentId));
+            validationDetail.setStudentId(studentId);
             validationDetail.setErrorDescription(message.getDescription());
             validationDetails.add(validationDetail);
             validationRepository.save(validationDetail);

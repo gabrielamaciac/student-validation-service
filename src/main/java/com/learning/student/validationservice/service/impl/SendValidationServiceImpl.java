@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @Component
@@ -24,7 +25,7 @@ public class SendValidationServiceImpl implements SendValidationService {
     }
 
     @Override
-    public void validateAndSend(String studentId, Student student) {
+    public void validateAndSend(UUID studentId, Student student) {
         // call ValidationService and check if student is valid
         List<ValidationDetail> validationDetails = validationService.validateStudent(studentId, student);
 

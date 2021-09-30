@@ -73,7 +73,7 @@ class ValidationServiceTest {
         when(validationCalculator.triggerRules(student)).thenReturn(customMessages);
 
         // When
-        List<ValidationDetail> actualList = validationService.validateStudent(ValidationTestData.STUDENT_ID, student);
+        List<ValidationDetail> actualList = validationService.validateStudent(ValidationTestData.STUDENT_UUID, student);
 
         // Then
         ArgumentCaptor<ValidationDetail> captor = ArgumentCaptor.forClass(ValidationDetail.class);
@@ -91,7 +91,7 @@ class ValidationServiceTest {
         when(validationCalculator.triggerRules(student)).thenReturn(new CustomMessages());
 
         // When
-        List<ValidationDetail> actualList = validationService.validateStudent(ValidationTestData.STUDENT_ID, student);
+        List<ValidationDetail> actualList = validationService.validateStudent(ValidationTestData.STUDENT_UUID, student);
 
         // Then
         verify(validationRepository, never()).save(any(ValidationDetail.class));

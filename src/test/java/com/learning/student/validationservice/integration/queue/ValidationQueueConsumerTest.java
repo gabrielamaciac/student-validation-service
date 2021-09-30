@@ -6,6 +6,8 @@ import com.learning.student.validationservice.util.ValidationTestData;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.UUID;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -23,7 +25,7 @@ class ValidationQueueConsumerTest {
 
     @Test
     void messageIsValidatedAndSent() {
-        validationQueueConsumer.receiveMessage(ValidationTestData.STUDENT_JSON);
-        verify(sendValidationService).validateAndSend(any(String.class), any(Student.class));
+        validationQueueConsumer.receiveMessage(ValidationTestData.STUDENT_JSON_WITH_ID);
+        verify(sendValidationService).validateAndSend(any(UUID.class), any(Student.class));
     }
 }

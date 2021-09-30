@@ -36,7 +36,7 @@ class ValidationFacadeTest {
         validationFacade.validateStudent(ValidationTestData.STUDENT_ID, student);
 
         // Then
-        verify(validationService).validateStudent(ValidationTestData.STUDENT_ID, student);
+        verify(validationService).validateStudent(ValidationTestData.STUDENT_UUID, student);
     }
 
 }

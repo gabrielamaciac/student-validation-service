@@ -6,6 +6,7 @@ import com.learning.student.validationservice.service.ValidationService;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class ValidationFacadeImpl implements ValidationFacade {
@@ -23,6 +24,6 @@ public class ValidationFacadeImpl implements ValidationFacade {
 
     @Override
     public List<ValidationDetail> validateStudent(String studentId, Student student) {
-        return validationService.validateStudent(studentId, student);
+        return validationService.validateStudent(UUID.fromString(studentId), student);
     }
 }

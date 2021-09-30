@@ -74,14 +74,14 @@ public class ValidationTestData {
         Address address = new Address(TEST_CITY, TEST_COUNTRY, TEST_NUMBER, TEST_STREET);
         Mark mark = new Mark(DATE_RECEIVED, 10.0);
         Grade grade = new Grade(TEST_SUBJECT, Collections.singletonList(mark));
-        return new Student(STUDENT_ID, TEST_FIRST_NAME, TEST_LAST_NAME, TEST_CNP, DATE_OF_BIRTH, address, Collections.singletonList(grade), true);
+        return new Student(STUDENT_UUID, TEST_FIRST_NAME, TEST_LAST_NAME, TEST_CNP, DATE_OF_BIRTH, address, Collections.singletonList(grade), true);
     }
 
     public static Student getInvalidStudent() {
         Address address = new Address(null, TEST_COUNTRY, TEST_NUMBER, TEST_STREET);
         Mark mark = new Mark(DATE_RECEIVED, 4.0);
         Grade grade = new Grade(TEST_SUBJECT, Collections.singletonList(mark));
-        return new Student(STUDENT_ID, TEST_FIRST_NAME, TEST_LAST_NAME, TEST_CNP, DATE_OF_BIRTH, address, Collections.singletonList(grade), true);
+        return new Student(STUDENT_UUID, TEST_FIRST_NAME, TEST_LAST_NAME, TEST_CNP, DATE_OF_BIRTH, address, Collections.singletonList(grade), true);
     }
 
     public static StudentDto getStudentDto() {
@@ -107,7 +107,7 @@ public class ValidationTestData {
     }
 
     public static ValidationResponse getValidationResponse() {
-        return new ValidationResponse(STUDENT_ID, true);
+        return new ValidationResponse(STUDENT_UUID, true);
     }
 
     public static String getStudentJson(Double grade1, Double grade2) {
@@ -140,7 +140,7 @@ public class ValidationTestData {
                 "}";
     }
 
-    public static final String getErrorForStudentJson(String uuid) {
+    public static String getErrorForStudentJson(String uuid) {
         return "[{\"studentId\":\"" + uuid + "\",\"errorName\":\"Grade average below 5.\",\"errorDescription\":\"There is at least one subject for which the average is below 5.\"}]";
     }
 
